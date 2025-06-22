@@ -1,14 +1,8 @@
 services:
   - type: web
     name: crewai-chat-app
-    env: python
-    buildCommand: |
-      python --version
-      pip install --upgrade pip
-      pip install --no-cache-dir -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
+    env: docker
+    dockerfilePath: ./Dockerfile
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.7
       - key: OPENAI_API_KEY
         sync: false  # Esta será configurada manualmente no dashboard do Render 
