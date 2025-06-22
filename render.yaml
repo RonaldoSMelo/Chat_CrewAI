@@ -2,7 +2,7 @@ services:
   - type: web
     name: crewai-chat-app
     env: docker
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: Dockerfile
     envVars:
       - key: OPENAI_API_KEY
         sync: false  # Esta será configurada manualmente no dashboard do Render 
