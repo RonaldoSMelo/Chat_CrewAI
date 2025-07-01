@@ -22,26 +22,27 @@ def health():
 
 @app.route('/crewai-test', methods=['GET'])
 def crewai_test():
-    """Teste básico do CrewAI"""
+    """Teste básico - sem CrewAI por enquanto"""
     try:
         # Verificar se a API key está configurada
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             return jsonify({
-                'message': 'Olá Mundo! Este é um teste básico do CrewAI.',
+                'message': 'Olá Mundo! Este é um teste básico.',
                 'status': 'demo_mode',
-                'note': 'Configure OPENAI_API_KEY para usar funcionalidade completa'
+                'note': 'CrewAI temporariamente desabilitado para evitar problemas de build'
             })
         
         return jsonify({
-            'message': 'Olá Mundo! CrewAI configurado e funcionando.',
+            'message': 'Olá Mundo! API Key configurada.',
             'status': 'ready',
-            'api_key': 'configured'
+            'api_key': 'configured',
+            'note': 'CrewAI será adicionado em breve'
         })
         
     except Exception as e:
         return jsonify({
-            'message': 'Olá Mundo! Erro ao inicializar CrewAI.',
+            'message': 'Olá Mundo! Erro no teste.',
             'status': 'error',
             'error': str(e)
         }), 500
