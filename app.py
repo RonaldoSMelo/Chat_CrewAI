@@ -82,6 +82,10 @@ def index():
     """Página principal"""
     return render_template('index.html')
 
+@app.route('/run', methods=['GET'])
+def run():
+    return jsonify({'status': 'running'})
+
 @app.route('/process_message', methods=['POST'])
 def process_message():
     """Processa a mensagem do usuário usando CrewAI"""

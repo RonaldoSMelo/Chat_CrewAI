@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # Copiar o resto da aplicação
 COPY . .
 
-# Expor a porta
-EXPOSE $PORT
+# Expor a porta (com fallback para 5000)
+EXPOSE ${PORT:-5000}
 
 # Comando para executar a aplicação
-CMD gunicorn app:app --bind 0.0.0.0:$PORT 
+CMD gunicorn app:app --bind 0.0.0.0:${PORT:-5000} --workers 1 --timeout 120 

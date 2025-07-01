@@ -1,0 +1,14 @@
+name: crewai-chat-app
+type: web
+build:
+  dockerfile: Dockerfile
+env:
+  - name: PORT
+    value: "5000"
+  - name: FLASK_ENV
+    value: "production"
+healthcheck:
+  path: /run
+  interval: 30s
+  timeout: 10s
+  retries: 3 
