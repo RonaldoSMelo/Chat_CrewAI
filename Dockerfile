@@ -6,6 +6,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
+    rustc \
+    cargo \
     && rm -rf /var/lib/apt/lists/*
 
 # Copiar requirements primeiro para aproveitar cache do Docker
