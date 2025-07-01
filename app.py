@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 import os
 from dotenv import load_dotenv
 
@@ -46,6 +46,14 @@ def crewai_test():
             'status': 'error',
             'error': str(e)
         }), 500
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    data = request.get_json()
+    user_message = data.get('message', '')
+    # Resposta simulada
+    response = f"Você disse: {user_message}. (Simulação CrewAI)"
+    return jsonify({'response': response})
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000) 
