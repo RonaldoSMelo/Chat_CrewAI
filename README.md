@@ -123,4 +123,32 @@ Este projeto é de código aberto e está disponível sob a licença MIT.
 
 ---
 
-**Desenvolvido com ❤️ usando CrewAI e Flask** 
+**Desenvolvido com ❤️ usando CrewAI e Flask**
+
+# CrewAI Chat App - Test Version
+
+Versão simplificada para teste de deploy no Render.
+
+## Endpoints
+
+- `GET /` - Página inicial
+- `GET /run` - Endpoint de teste para Render
+- `GET /health` - Health check
+
+## Deploy
+
+Este app está configurado para deploy no Render usando Docker.
+
+## Desenvolvimento Local
+
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
+## Teste Local
+
+```bash
+curl http://localhost:5000/run
+# Deve retornar: {"status": "running"}
+``` 
