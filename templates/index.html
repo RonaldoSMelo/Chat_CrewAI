@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrewAI Chat App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .status {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .endpoints {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .endpoint {
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .test-button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        .test-button:hover {
+            background: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+        }
+        .error {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 Olá Mundo! CrewAI Chat App</h1>
+        
+        <div class="status">
+            <h2>Status do Sistema</h2>
+            <p>✅ Aplicação Flask funcionando</p>
+            <p>✅ Endpoint /run disponível</p>
+            <p>✅ CrewAI integrado</p>
+        </div>
+
+        <div class="endpoints">
+            <h2>Endpoints Disponíveis</h2>
+            <div class="endpoint">GET / - Esta página</div>
+            <div class="endpoint">GET /run - Health check para Render</div>
+            <div class="endpoint">GET /health - Status da aplicação</div>
+            <div class="endpoint">GET /crewai-test - Teste do CrewAI</div>
+        </div>
+
+        <div>
+            <h2>Testes</h2>
+            <button class="test-button" onclick="testHealth()">Testar /health</button>
+            <button class="test-button" onclick="testCrewAI()">Testar /crewai-test</button>
+            <button class="test-button" onclick="testRun()">Testar /run</button>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function testEndpoint(endpoint) {
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                showResult(data, 'success');
+            } catch (error) {
+                showResult({error: error.message}, 'error');
+            }
+        }
+
+        function testHealth() {
+            testEndpoint('/health');
+        }
+
+        function testCrewAI() {
+            testEndpoint('/crewai-test');
+        }
+
+        function testRun() {
+            testEndpoint('/run');
+        }
+
+        function showResult(data, type) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = type;
+            resultDiv.innerHTML = '<h3>Resultado:</h3><pre>' + JSON.stringify(data, null, 2) + '</pre>';
+        }
+    </script>
+</body>
+</html> 
